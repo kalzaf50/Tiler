@@ -18,6 +18,7 @@ class Platform(pygame.sprite.Sprite):
         self.move_x = move_x
         self.move_y = move_y
 
+	#Update the direction of the platform
     def update(self):
         self.rect.x += self.move_direction * self.move_x
         self.rect.y += self.move_direction * self.move_y
@@ -26,6 +27,7 @@ class Platform(pygame.sprite.Sprite):
             self.move_direction *= -1
             self.move_counter *= -1
 
+#Enemy class
 class Enemy(pygame.sprite.Sprite):
 	def __init__(self, x, y, type):
 		pygame.sprite.Sprite.__init__(self)
@@ -54,12 +56,13 @@ class Enemy(pygame.sprite.Sprite):
 		self.death_counter = 0
 		self.death_index = 0
 
+	#Set the death state for the NPC
 	def checkDeath(self, death):
 		self.death = death
-
+	#Return the death state of the N{C}
 	def getDeath(self):
 		return self.death
-
+	#Update the state of the NPC
 	def update(self, type, idle):
 		
 		move_cooldown = 15

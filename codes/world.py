@@ -10,6 +10,7 @@ player_group = pygame.sprite.Group()
 moving_platforms = pygame.sprite.Group()
 slime_group = pygame.sprite.Group()
 
+#World class
 class World():
 	def __init__(self, screen, tile_size, rows, cols):
 		self.world_data = []
@@ -33,15 +34,18 @@ class World():
 				self.world_data[tile][0] = 1
 				self.world_data[tile][self.rows - 1] = 1
 
+	#Clear the world
 	def clear_world(self):
 		for row in range(self.rows):
 			for col in range(self.rows):
 				self.world_data[row][col] = 0
 				self.clear = True
 
+	#Empty the tile list
 	def clear_tile(self):
 		self.tile_list.clear()
 
+	#Returns the number of exit
 	def count_exits(self):
 		exit_count = 0
 		for row in range(self.rows):
@@ -50,6 +54,7 @@ class World():
 					exit_count += 1
 		return exit_count
 	
+	#Returns the number of player's start position
 	def count_player(self):
 		player_count = 0
 		for row in range(self.rows):
@@ -58,12 +63,14 @@ class World():
 					player_count += 1
 		return player_count
 	
+	#Returns the 2D position of an image
 	def get_position(self, type):
 		for row in range(self.rows):
 			for col in range(self.rows):
 				if self.world_data[row][col] == type:
 					return col * self.tile_size , row * self.tile_size
 	
+	#Allows the user to edit the world real-time
 	def edit_world(self):
 		for row in range(self.rows):
 			for col in range(self.rows):
@@ -139,6 +146,7 @@ class World():
 						img_rect.y = row * self.tile_size
 						self.screen.blit(img, img_rect)
 
+	#Load world
 	def load_world(self):
 		for row in range(self.rows):
 			for col in range(self.rows):
@@ -200,6 +208,7 @@ class World():
 						player = images.Images("player", col * self.tile_size, row * self.tile_size)
 						player_group.add(player)
 
+	#Return the spirte group 
 	def get_group(group):
 
 		if group == "lava":
@@ -212,7 +221,8 @@ class World():
 			return moving_platforms
 		elif group == "slime":
 			return slime_group
-		
+	
+	#Draw the tiles on the screen
 	def draw(self):
 		for tile in self.tile_list:
 			self.screen.blit(tile[0], tile[1])

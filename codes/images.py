@@ -4,6 +4,7 @@ from vars import *
 
 tile_size = 50
 
+#Image class
 class Images(pygame.sprite.Sprite):
 	def __init__(self, image, x, y):
 		pygame.sprite.Sprite.__init__(self)
@@ -25,6 +26,7 @@ class Images(pygame.sprite.Sprite):
 		else:
 			self.rect.y = y
 
+	#Update the images frame
 	def update(self, image):
 		lava_cooldown = 7
 		
@@ -37,7 +39,8 @@ class Images(pygame.sprite.Sprite):
 				if self.index >= len(animation.get_player_animation("props", "lava")):
 					self.index = 0
 				self.image = animation.get_player_animation("props", "lava")[self.index]
-				
+
+	#Clear the sprite list			
 	def reset_npcs(group):
 		for member in group:
 			group.remove(member)

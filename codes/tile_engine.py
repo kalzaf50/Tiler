@@ -160,7 +160,7 @@ class TileEngine:
 				if elapsed_time >= 3:
 					self.verified_saved = False
 					self.loaded = False
-			
+			#If the program triggers a warning
 			if self.warning:
 				self.warning_text = "Cannot edit the map in testing mode!"
 				warning_rect = pygame.Rect((self.screen.get_width() - width) // 2, (self.screen.get_height() - height) // 2, width, height)
@@ -169,7 +169,7 @@ class TileEngine:
 				self.draw_text(self.warning_text, self.get_font(20), white, self.screen.get_width() // 2, warning_rect.y + 90, True)
 				okay_button.changeColor(mouse_pos)
 				okay_button.update(self.screen)
-			
+			#If the player click the stats button
 			if self.stats:
 				pygame.draw.rect(self.screen, dark_grey, stats_rect)
 				self.draw_text(f'FPS: {int(self.clock.get_fps())}', self.get_font(25), 'white', stats_rect.x + 50, stats_rect.height // 2, False)
@@ -301,7 +301,6 @@ class TileEngine:
 					elif event.key == pygame.K_DOWN and self.level > 1:
 						self.level -= 1
 			
-			print(self.clock.get_fps())
 			#update game display window
 			pygame.display.flip()
 
