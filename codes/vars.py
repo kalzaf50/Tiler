@@ -26,8 +26,23 @@ player_img = pygame.image.load('assets/images/player_icon.png')
 nutin_img = pygame.image.load('assets/images/nothing.png')
 
 #load sound
+walk_sound = pygame.mixer.Sound("assets/sounds/walk.wav")
+attack_sound = pygame.mixer.Sound("assets/sounds/attack.wav")
 button_sound = pygame.mixer.Sound("assets/sounds/button.wav")
 splatSound = pygame.mixer.Sound("assets/sounds/splat.wav")
+walking_channel = pygame.mixer.Channel(1)
+attack_channel = pygame.mixer.Channel(2)
+
+#Cooldown
+walk_cooldown = 7
+jump_cooldown = 5.5
+death_cooldown = 10
+idle_cooldown = 50
+attack_cooldown = 4	
+
+#Physics
+col_thresh = 20
+gravity = 1  
+terminal_velocity = 15 
 
 #Add win function
-#Fix moving platform physics

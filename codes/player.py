@@ -5,11 +5,6 @@ import world
 from pygame import mixer
 from vars import *
 
-mixer.init()
-walk_sound = pygame.mixer.Sound("assets/sounds/walk.wav")
-attack_sound = pygame.mixer.Sound("assets/sounds/attack.wav")
-walking_channel = pygame.mixer.Channel(1)
-attack_channel = pygame.mixer.Channel(2)
 class Player():
 	def __init__(self, x, y):
 		self.walk_index = 0
@@ -47,6 +42,9 @@ class Player():
 		self.rect.y = y
 
 		self.clock = pygame.time.Clock()
+
+	def __del__(self):
+		print('Destructor called, Player deleted.')
 	
 	#Return player's state of attacking
 	def getAttacked(self):
@@ -54,18 +52,9 @@ class Player():
 	
 	#Update player's action and state
 	def update(self, screen, world_data):
-
 		dx = 0
 		dy = 0
-		col_thresh = 20
-		walk_cooldown = 7
-		jump_cooldown = 5.5
-		death_cooldown = 10
-		idle_cooldown = 50
-		attack_cooldown = 4	
-		gravity = 1  # The acceleration due to gravity
-		terminal_velocity = 15  # The terminal velocity limit
-
+		
 		if self.death_anim == False:
 			
 			#get keypresses
@@ -239,6 +228,4 @@ class Player():
 
 		#draw player onto screen
 		screen.blit(self.image, (self.rect.x - 15, self.rect.y))
-		# pygame.draw.rect(screen, (255, 255, 255), self.rect, 2, 0)
-
 		return self.alive, self.win

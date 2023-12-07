@@ -228,6 +228,7 @@ class TileEngine:
 					if stop_button.checkForInput(mouse_pos):
 						button_sound.play()
 						self.world.clear_tile()
+						del test_player
 						for prop in stage_props:
 							images.Images.reset_npcs(prop)
 						self.test = False
