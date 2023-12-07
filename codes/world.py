@@ -63,6 +63,24 @@ class World():
 					player_count += 1
 		return player_count
 	
+	#Returns the number of NPCS
+	def count_npcs(self):
+		npcs_count = 0
+		for row in range(self.rows):
+			for col in range(self.rows):
+				if self.world_data[row][col] == 9:
+					npcs_count += 1
+		return npcs_count
+	
+	#Returns the number of total blocks
+	def count_blocks(self):
+		blocks_count = 0
+		for row in range(self.rows):
+			for col in range(self.rows):
+				if self.world_data[row][col] > 0 and self.world_data[row][col] < 5:
+					blocks_count += 1
+		return int(blocks_count)
+	
 	#Returns the 2D position of an image
 	def get_position(self, type):
 		for row in range(self.rows):

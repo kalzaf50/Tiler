@@ -95,13 +95,13 @@ class TileEngine:
 		moving_platforms = world.World.get_group("platform")
 		slime_group = world.World.get_group("slime")
 		stage_props =  [lava_group, exit_group, player_group, moving_platforms, slime_group]
+		npcs_count, blocks_count = 0, 0
 
 		#main game loop
 		run = True
 		while run:
 
 			self.clock.tick(fps)
-			start_time = time.time()
 			mouse_pos = pygame.mouse.get_pos()
 
 			#draw background
@@ -171,9 +171,14 @@ class TileEngine:
 				okay_button.update(self.screen)
 			#If the player click the stats button
 			if self.stats:
+				if not self.test:
+					npcs_count = self.world.count_npcs()
+					blocks_count = self.world.count_blocks()
 				pygame.draw.rect(self.screen, dark_grey, stats_rect)
-				self.draw_text(f'FPS: {int(self.clock.get_fps())}', self.get_font(25), 'white', stats_rect.x + 50, stats_rect.height // 2, False)
-				self.draw_text(f"Loading Time: {loading_time:.5f} Secs", self.get_font(25), 'white', stats_rect.x + 200, stats_rect.height // 2, False)
+				self.draw_text(f'FPS: {int(self.clock.get_fps())}', self.get_font(25), 'white', stats_rect.x + 20, 10 , False)
+				self.draw_text(f"Loading Time: {loading_time:.5f} Secs", self.get_font(25), 'white', stats_rect.x + 20, 40, False)
+				self.draw_text(f'TOTAL NPCS: {npcs_count}', self.get_font(25), 'white', stats_rect.x + 400, 10 , False)
+				self.draw_text(f'TOTAL BLOCKS: {blocks_count}', self.get_font(25), 'white', stats_rect.x + 400, 40 , False)
 
 			#event handler
 			for event in pygame.event.get():
